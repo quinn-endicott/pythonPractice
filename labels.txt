@@ -1,0 +1,6 @@
+Rent
+Gas
+Food
+Clothing
+Car Payment
+Misc
