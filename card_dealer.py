@@ -14,18 +14,61 @@ def turnResult(usrScore, dealerScore):
     else:
         return False, 'no win'
 
-def winPrinter(winBool, state):
-    if winBool is True:
-        if state == 'user win':
-            print('You Win!')
-        elif state == 'dealer bust':
-            print('You Win! The dealer busted out.')
-        elif state == 'user bust':
-            print('The dealer won! You busted out.')
-        else:
-            print('The dealer won!')
+def winPrinter(state):
+    
+    if state == 'user win':
+        print('You Win!')
+    elif state == 'dealer bust':
+        print('You Win! The dealer busted out.')
+    elif state == 'user bust':
+        print('The dealer won! You busted out.')
     else:
+        print('The dealer won!')
+
+
+def score(userHand, dealerHand):
+    usrScore = 0
+    dealerScore = 0
+    uAceNum = 0
+    dAceNum = 0
+    aceList = []
+    nAceList = []
+    dAceList = []
+    dNAceList = []
+    aces = ['Ace of Spades', 'Ace of Hearts', 'Ace of Clubs', 'Ace of Diamonds']
+    for usrKey, cardNum in userHand.items():
+        usrScore += cardNum
+        if usrKey in aces:
+            uAceNum += 1
+            aceList.append(cardNum)
+        else:
+            nAceList.append(cardNum)
+    if uAceNum == 0:
         pass
+    else:
+        uHiAce = sum(aceList) + 10
+        if (uHiAce + sum(nAceList)) <= 21:
+            usrScore += 10
+
+    for dlrKey, dCardNum in dealerHand.items():
+        dealerScore += dCardNum
+        if dlrKey in aces:
+            dAceNum += 1
+            dAceList.append(dCardNum)
+        else:
+            dNAceList.append(dCardNum)
+    if dAceNum == 0:
+        pass
+    else:
+        dHiAce = sum(dAceList) + 10
+        if (dHiAce + sum(dNAceList)) <= 21:
+            dealerScore += 10
+    return usrScore, dealerScore
+
+
+
+
+
 
 def create_deck():
 # Create a dictionary with each card and its value
