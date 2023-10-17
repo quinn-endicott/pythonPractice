@@ -2,7 +2,30 @@
 # This program uses a dictionary as a deck of cards.
 import random
 
+def turnResult(usrScore, dealerScore):
+    if usrScore == 21:
+        return True, 'user win'
+    elif dealerScore == 21:
+        return True, 'dealer win'
+    elif usrScore > 21:
+        return True, 'user bust'
+    elif dealerScore > 21:
+        return True, 'dealer bust'
+    else:
+        return False, 'no win'
 
+def winPrinter(winBool, state):
+    if winBool is True:
+        if state == 'user win':
+            print('You Win!')
+        elif state == 'dealer bust':
+            print('You Win! The dealer busted out.')
+        elif state == 'user bust':
+            print('The dealer won! You busted out.')
+        else:
+            print('The dealer won!')
+    else:
+        pass
 
 def create_deck():
 # Create a dictionary with each card and its value
