@@ -2,6 +2,19 @@
 # This program uses a dictionary as a deck of cards.
 import random
 
+def deal(deck, times, userHand, dealerHand):
+    for Ucard in range(times):
+        UrandKey = random.choice(list(deck.keys()))
+        UcardValue = deck.pop(UrandKey)
+        userHand[UrandKey] = UcardValue
+            
+
+    for Dcard in range(times):
+        DrandKey = random.choice(list(deck.keys()))
+        DcardValue = deck.pop(DrandKey)
+        dealerHand[DrandKey] = DcardValue
+    return userHand, dealerHand
+
 def turnResult(usrScore, dealerScore):
     if usrScore == 21:
         return True, 'user win'
@@ -14,16 +27,18 @@ def turnResult(usrScore, dealerScore):
     else:
         return False, 'no win'
 
-def winPrinter(state):
-    
-    if state == 'user win':
-        print('You Win!')
-    elif state == 'dealer bust':
-        print('You Win! The dealer busted out.')
-    elif state == 'user bust':
-        print('The dealer won! You busted out.')
+def winPrinter(winBool, state):
+    if winBool is True:
+        if state == 'user win':
+            print('You Win!')
+        elif state == 'dealer bust':
+            print('You Win! The dealer busted out.')
+        elif state == 'user bust':
+            print('The dealer won! You busted out.')
+        else:
+            print('The dealer won!')
     else:
-        print('The dealer won!')
+        pass
 
 
 def score(userHand, dealerHand):
