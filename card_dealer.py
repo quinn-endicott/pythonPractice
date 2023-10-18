@@ -16,33 +16,59 @@ def dDeal(deck, times, dealerHand):
         dealerHand[DrandKey] = DcardValue
     return dealerHand
 
+#this function determines if a win has occurred and passes a string value to indicate
+#how it happened, this is now in the card_dealer.py module
 def turnResult(usrScore, dealerScore, hitVar):
-    if usrScore == 21:
+    #rare: if both user and dealer get 21 it's a tie, return true because game
+    #is complete
+    if usrScore == 21 and dealerScore == 21:
+        return True, 'tie'
+    #if user hits 21, user wins
+    elif usrScore == 21:
         return True, 'user win'
+    #if dealer hits 21, dealer wins
     elif dealerScore == 21:
         return True, 'dealer win'
+    #if dealer wins because user busts out
     elif usrScore > 21:
         return True, 'user bust'
+    #if user wins because dealer busts out
     elif dealerScore > 21:
         return True, 'dealer bust'
+    #if user stands and dealer will not draw in next round
     elif dealerScore > 16 and hitVar != 'y':
+        #if the user has more points than the dealer user wins
         if usrScore > dealerScore:
             return True, 'user win'
+        #otherwise dealer wins
         else:
             return True, 'dealer win'
+    #otherwise no one has won 
     else:
         return False, 'no win'
 
+
+
+#winPrinter takes the winBool and win state variables and prints various statements
+#based on who won and how they won, if there is no win, do nothing
 def winPrinter(winBool, state):
+    #if there is a winner
     if winBool is True:
+        #if the user wins because higher score
         if state == 'user win':
-            print('You Win!')
+            print('You Win!\n')
+        elif state == 'tie':
+            print("It's a tie!\n")
+        # if the user won becuase dealer broke 21
         elif state == 'dealer bust':
-            print('You Win! The dealer busted out.')
+            print('You Win! The dealer busted out.\n')
+        # if dealer wins because you bust out
         elif state == 'user bust':
-            print('The dealer won! You busted out.')
+            print('The dealer won! You busted out.\n')
+        # if dealer wins by points
         else:
-            print('The dealer won!')
+            print('The dealer won!\n')
+    # if winBool is false no one wins, do nothing
     else:
         pass
 
