@@ -100,30 +100,49 @@ def winPrinter(winBool, state):
         pass
 
 
+#score function scores the cards in each hand and returns the scores
 def score(userHand, dealerHand):
+    #initialize user score
     usrScore = 0
+    #initialize dealerscore
     dealerScore = 0
+    #counter for user aces
     uAceNum = 0
+    #counter for dealer aces
     dAceNum = 0
+    #empty list for user aces
     aceList = []
+    #empty list for user non aces
     nAceList = []
+    #dealer ace list
     dAceList = []
+    #dealer non ace list
     dNAceList = []
+    #list of keys for cards that are aces
     aces = ['Ace of Spades', 'Ace of Hearts', 'Ace of Clubs', 'Ace of Diamonds']
+    #for the card and card value in the user's hand
     for usrKey, cardNum in userHand.items():
+        #base score is just the sum of card values
         usrScore += cardNum
+        #if the user's card is an ace
         if usrKey in aces:
+            #add 1 to aceNum
             uAceNum += 1
+            #append the card value to aceList
             aceList.append(cardNum)
+        #if card is not an ace
         else:
+            #append value to non ace list
             nAceList.append(cardNum)
-    if uAceNum == 0:
-        pass
-    else:
+    #removed unnecessary if clause for no aces, if there are aces
+    if uAceNum >= 1:
+        #high value of the aces is sum(aceList)+10, 1 is valued as 11
         uHiAce = sum(aceList) + 10
+        #if high ace value + sum(nAceList) is less than 21
         if (uHiAce + sum(nAceList)) <= 21:
+            #add 10 to the usrScore
             usrScore += 10
-
+    #logic for dealing with the dealer hand is the same
     for dlrKey, dCardNum in dealerHand.items():
         dealerScore += dCardNum
         if dlrKey in aces:
@@ -131,13 +150,13 @@ def score(userHand, dealerHand):
             dAceList.append(dCardNum)
         else:
             dNAceList.append(dCardNum)
-    if dAceNum == 0:
-        pass
-    else:
+    if dAceNum > 0:
         dHiAce = sum(dAceList) + 10
         if (dHiAce + sum(dNAceList)) <= 21:
             dealerScore += 10
+    #return usrScore and dealerScore
     return usrScore, dealerScore
+
 
 
 
