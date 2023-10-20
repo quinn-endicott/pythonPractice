@@ -16,9 +16,34 @@ def dDeal(deck, times, dealerHand):
         dealerHand[DrandKey] = DcardValue
     return dealerHand
 
+def printTurn(userHand, dealerHand, usrScore, dealerScore, turnNumber):
+    print(f'Your cards, turn {turnNumber}: ')
+    for uCard in userHand:
+        print(uCard)
+    print(f'Your Score is: {usrScore}\n')
+
+    print(f"Dealer's cards, turn {turnNumber}: ")
+    for dCard in dealerHand:
+        print(dCard)
+    print(f'Dealer score: {dealerScore}\n')
+
+def deal(deck, times, hand):
+    #for range(times passed as argument)
+    for card in range(times):
+        #select a random key from the deck
+        randKey = random.choice(list(deck.keys()))
+        #pop value from dictionary, card is now gone and cannot be drawn again
+        cardValue = deck.pop(randKey)
+        #add the chosen card to the user's hand
+        hand[randKey] = cardValue
+    #return userhand
+    return hand
+
 #this function determines if a win has occurred and passes a string value to indicate
 #how it happened, this is now in the card_dealer.py module
 def turnResult(usrScore, dealerScore, hitVar):
+    if usrScore > 21 and dealerScore > 21:
+        return True, 'both bust'
     #rare: if both user and dealer get 21 it's a tie, return true because game
     #is complete
     if usrScore == 21 and dealerScore == 21:
@@ -57,6 +82,8 @@ def winPrinter(winBool, state):
         #if the user wins because higher score
         if state == 'user win':
             print('You Win!\n')
+        elif state == 'both bust':
+            print('Everyone looses!')
         elif state == 'tie':
             print("It's a tie!\n")
         # if the user won becuase dealer broke 21
