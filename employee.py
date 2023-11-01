@@ -14,6 +14,9 @@ def deleteEmp(empDic):
     popOB = empDic.pop(delKey)
     return popOB
 
+def saveDic(empDic, FILE):
+    with open(FILE, 'wb') as savFile:
+        pickle.dump(empDic, savFile)
 
 
 def changeEmp(empDic):
@@ -62,7 +65,7 @@ def addEmp(empDic):
             empInt = int(empNum)
     empDepartment = input('Enter the department the employee works in: ')
     empTitle = input("Enter the employee's job title: ")
-    newEmp = employee.Employee(empName, empInt, empDepartment, empTitle)
+    newEmp = Employee(empName, empInt, empDepartment, empTitle)
     empDic[empInt] = newEmp
     return newEmp
 
