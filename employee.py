@@ -19,6 +19,7 @@ def saveDic(empDic, FILE):
         pickle.dump(empDic, savFile)
 
 
+
 def changeEmp(empDic):
     chKey = int(input('Enter the ID of the employee you want to modify: '))
     while chKey not in empDic:
@@ -26,10 +27,17 @@ def changeEmp(empDic):
             return 'no result'
             break
         else:
-            chKey = int(input('Employee ID must exist, try again: '))
+            contVar = input('Employee not found, search again (y/n)?').lower()
+            if contVar == 'y':
+                chKey = int(input('Enter employee ID: '))
+            else:
+                return 'abort'
+                break
+
     emOB = empDic[chKey]
     print('Current employee information: ')
     printCurrent(emOB)
+    print()
     nVar = input("Change the employee's name (y/n)?").lower()
     if nVar == 'y':
         nName = input('Enter new name: ')
@@ -41,9 +49,14 @@ def changeEmp(empDic):
     tVar = input("Change the employee's job title (y/n)?").lower()
     if tVar == 'y':
         nTit = input('Enter the new job title: ')
-        emOB.set_department(nTit)
+        emOB.set_job_title(nTit)
     
-    return 'result', emOB
+    return emOB
+
+
+
+
+
 
 
 
@@ -84,6 +97,7 @@ def getMenuChoice():
     print('3: Change employee information')
     print('4: Delete an employee')
     print('5: Quit')
+    print()
     menuChoice = int(input('What do you want to do?  '))
 
     while menuChoice < 1 or menuChoice > 5:
@@ -98,7 +112,7 @@ def lookUp(empDic):
         while searchKey not in empDic:
             if len(empDic) == 0:
                 break
-            contVar = input('Would you like to try again(y/n): ').lower()
+            contVar = input('Invalid input, would you like to try again(y/n): ').lower()
             if contVar == 'y':
                 searchKey = int(input('Enter a valid ID: '))
             else:
@@ -107,10 +121,7 @@ def lookUp(empDic):
         empOB = empDic[searchKey]
         return empOB
     except:
-        if contVar != 'y':
-            return 'abort'
-        else:
-            return 'fail'
+        return 'fail'
 
 
 class Employee:
