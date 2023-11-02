@@ -1,0 +1,103 @@
+Transcript for Chapter 10 Exercises
+
+Exercise 1: pet class
+:23 I'm going to do exercise 1 with the pet class first
+
+03:25 I'm using a sample exercise from the book to get the syntax right
+
+07:10 Creating the pet class, init method
+Next is the methods for working with the pet object data
+
+12:40 The mutator methods are all done, next is the accessor methods
+
+15:20 Accessor methods done, next step is to make an external module with this method, going to create a pet.py file and copy class there, will preserve cell in notebook
+
+22:03 pet.py is created, did a quick test to make sure everything works and it does when I capitalize the name of the class correctly
+Next step is to start working on the main program logic
+
+32:33 main function is written, next step is to test this
+
+36:10 issue with what strings are printing, 
+
+38:34 Success, code runs and displays output properly, now to comment the code
+
+46:54 Everything wrapped up for first exercise, just going to make commits and finish up for now
+
+Exercise 7: Employee Management System
+:00 The next exercise that I chose to do is the Employee Management System. This exercise requires making the employee class first, so I'm going to get some markdown down and start writing the employee class definition
+
+6:12 Besides the init function I want to have accessor methods for each of the data attributes of the employee objects, they aren't necessary for this but I will add mutator methods for all attributes except id number which needs to remain constant since it's the key value.
+
+13:15 The employee class definition is written, I'm going to test that it works and then put it in its own module.
+
+18:57 The employee class works and is in its own module, now I have to  start designing the main program logic. There was an example in the chapter similar to this
+
+38:06 This is the first supporting function for my main function, if it works it should create a file called employeeDir.dat and I'll be able to see it. The book's example is using a global constant for the filename, but that would either need to move to the employee module this function will be in or just be declared in the loadEmpDic() function which is what I'm going to do
+
+41:43 I'm not handling the pickling right just from looking back at this, hang on
+
+45:53 Ok, it works now. Had to feed values in to the empty dictionary its making to actually see something. Now this can move to the employee.py file also it just occurred to me why filename being a constant makes sense some making soem changes
+
+50:51 Next, the user is going to have to choose from a menu to interact with the employee dictionary, function for making choices needed
+
+56:53 Actually seems more logical to have the menu choices in a while loop like in the example
+
+1:09:48 The getMenuChoice function is working, now the functions for dealing with the dictionary need to be make, probably write them into the main function to help with reading it
+
+1:15:12 Making a function for looking up objects from the dictionary by employee id key value
+
+1:19:55 lookup function is going to take a user input for the id number and either return the corresponding object or an error that the key was not found
+
+1:46:42 Struggling to make this function work 
+
+1:49:33 Now when there are no keys to find ie dictionary is empty a condition state 'fail' will return otherwise will prompt until user enters appropriate key, add some kind of abort function if I remember
+
+1:56:22 User can now abort and the function will pass an abort state
+
+2:09:09 starting to work on addEmp() function, should probably do a commit as well
+
+2:30:35 Most of the way through banging out addEmp(), going to quit for the night
+
+PE 7 screen recording 2
+:00 I think at this point I'm figuring out the behavior when an employee is added, probably some output for that so you know it happened
+
+6:30 Next function handles changing data, I guess I should test this and move it to the employee module as well
+
+12:30 working on add employee function, need to change return values and insertion in dictionary so id is an int
+
+16:55 issue was I didn't change the variable being output to the integer
+
+18:12 Just realized the constant status printing could be accomplished via a __str__ method I can add to the employee class
+
+32:06 not really a __str__ method, this returns the ojects values to 4 variables 
+
+49:30 I refactored so my code so that I can use a __str__ method to print information about the last modification to the dictionary
+
+51:40 Next function will change an employees information, id number is not changeable
+
+1:23:50 changeEmp() is now working obviously it will not need to be employee.printCurrent() when it is in the employee.py file
+
+:00 snagit cannot handle computer going to sleep, fortunately video was not lost, starting a new one
+
+5:48 playing around with what to return from changeEmp and what to display
+
+7:38 I've forgotten how to remove an item from a dictionary so I'll have to learn that again
+
+23:32 deleteEmp() is working, put in module and handle in main
+
+27:22 Last function integrated, need procedure at end to save the file, should be wb as file should be replaced with most recent version
+
+35:19 Took a second to find it, but the file was created and saved, that should be all the parts of this program
+
+38:42 The plan is to call main, enter the three employees in the book, look up one, change one, and delete one then quit and have the file saved on exit
+
+45:17 Almost working, save function does not have access to the variable
+
+50:58 Should now be able to reopen the file and look up employee in it
+
+53:12 It works, will walk through more in demo video, thats it for now
+
+:00 adding in some handling for the error states I return when there are no items in a ditionary or the user aborts or whatever, also running into indentation issues for seemingly no reason
+
+18:25 should be ready to try again
+
