@@ -3,16 +3,30 @@ import pickle
 def printCurrent(curOB):
     print(curOB.__str__())
 
+#the deleteEmp function will pop the employee object out of the dictionary by the 
+#key the user enters
 def deleteEmp(empDic):
+    #input the key of the value to delete
     delKey = int(input('Enter the ID of the employee to delete: '))
+    #while the key provided is not in the dictionary
     while delKey not in empDic:
+        #if there are no items in the dictionary
         if len(empDic) == 0:
-            return 'no result'
+            #return 'no result'
+            return None
+            #break loop
             break
         else:
+            #prompt for a valid key to delete
             delKey = int(input('Employee ID must exist, try again: '))
+    #pop object from dictionary by key, assign to variable
     popOB = empDic.pop(delKey)
+    #return object that was removed
     return popOB
+
+
+
+    
 
 def saveDic(empDic, FILE):
     with open(FILE, 'wb') as savFile:
@@ -20,38 +34,68 @@ def saveDic(empDic, FILE):
 
 
 
-def changeEmp(empDic):
-    chKey = int(input('Enter the ID of the employee you want to modify: '))
-    while chKey not in empDic:
-        if len(empDic) == 0:
-            return 'no result'
-            break
-        else:
-            contVar = input('Employee not found, search again (y/n)?').lower()
-            if contVar == 'y':
-                chKey = int(input('Enter employee ID: '))
-            else:
-                return 'abort'
-                break
 
+#changeEmp is a function that allows the user to replace the name, department, and
+#job_title values in a selected employee onject
+def changeEmp(empDic):
+    #enter the key for the employee to modify
+    chKey = int(input('Enter the ID of the employee you want to modify: '))
+    #while the entered key is not in the dictionary
+    while chKey not in empDic:
+        # if there is nothing in the dictionary
+        if len(empDic) == 0:
+            #return 'no result'
+            return None
+            #break out of loop
+            break
+        #else the search term is not one of the present values
+        else:
+            #does user want to search again?
+            contVar = input('Employee not found, search again (y/n)?').lower()
+            #if user wants to continue
+            if contVar == 'y':
+                #enter a valid id
+                chKey = int(input('Enter employee ID: '))
+            #if user did not choose to continue
+            else:
+                #return 'abort'
+                return None
+                #break loop
+                break
+    #assign object at chKey to emOB            
     emOB = empDic[chKey]
+    #context
     print('Current employee information: ')
+    #print current state of emOB
     printCurrent(emOB)
     print()
+    #do you want to change the name?
     nVar = input("Change the employee's name (y/n)?").lower()
+    #if nVar is yes
     if nVar == 'y':
+        #enter new name
         nName = input('Enter new name: ')
+        #call set_name method for emOB
         emOB.set_name(nName)
+    #do you want to change department, works like above
     dVar = input("Change the employee's department (y/n)?").lower()
     if dVar == 'y':
         nDep = input('Enter the new department: ')
+        #uses set_department method
         emOB.set_department(nDep)
+    #do you want to change job_title, works like above
     tVar = input("Change the employee's job title (y/n)?").lower()
     if tVar == 'y':
         nTit = input('Enter the new job title: ')
+        #uses set_job_title method
         emOB.set_job_title(nTit)
-    
+    # return employee object
     return emOB
+
+
+
+
+
 
 
 
