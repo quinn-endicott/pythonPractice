@@ -1,3 +1,4 @@
+from PIL import Image
 class Pet:
     #initialize Pet object
     #objects in the pet class have 3 data attributes: name, age, and animal type
@@ -28,3 +29,24 @@ class Pet:
     #accessor method, returns age
     def get_age(self):
         return self.__age
+    
+#this function resizes images to 500 pixels maximum on a side and saves as a web
+#image copy with an appropriate filename
+def imSizer(imFile):
+    #open the image pile with pillow
+    im = Image.open(imFile)
+    #slice all except extension for name
+    imName = imFile[:-4]
+    #slice last 3 for extension
+    imFormat = imFile[-3:]
+    dispIm = im.copy()
+    #these images are too large to effeciently load online, pillow has a thumbnail
+    #function and I'll use that to make the image to display in the output
+    dispIm.thumbnail((500,500))
+    #display image in program output
+    webFile = f'{imName}_websize.{imFormat}'
+
+    dispIm.save(webFile)
+    dispIm.close()
+    im.close()
+    return webFile
