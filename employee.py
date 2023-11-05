@@ -1,7 +1,10 @@
 import pickle
 
+
+#printCurrent prints the data associated with referenced object
 def printCurrent(curOB):
-    print(curOB.__str__())
+    #uses __str__ method for curOB, now without redundant .__str__
+    print(curOB)
 
 #the deleteEmp function will pop the employee object out of the dictionary by the 
 #key the user enters
