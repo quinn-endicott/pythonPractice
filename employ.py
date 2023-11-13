@@ -33,7 +33,7 @@ class productionWorker(Employee):
     
 
     
-class shiftSupervisor:
+class shiftSupervisor(Employee):
     def __init__(self, name, idNumber, salary, bonus):
         Employee.__init__(self, name, idNumber)
         self.__salary = salary
