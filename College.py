@@ -431,3 +431,8 @@ def majOptions():
     print('3. Change Major information')
     print('4. Delete Major Records')
     print('5. Show all Majors')
+def mainOptions():
+    print('Choose a database to operate on: ')
+    print('1. Students')
+    print('2. Departments')
+    print('3. Majors')
