@@ -25,6 +25,32 @@ def createCollege():
 
 def stuCRUD():
     pass
+
+def newStuInfo():
+    #name, depID, majID
+    name = input("Enter the student's name: ")
+    depID = int(input("Enter the student's Department ID: "))
+    majID = int(input("Enter the student's Major ID: "))
+    return name, depID, majID
+     
+    pass
+def insertStu(name, depID, majID):
+    conn = None
+    try:
+        conn = sqlite3.connect('college.db')
+        cur = conn.cursor()
+        cur.execute('''INSERT INTO Students(Name, DepID, MajorID)
+                    VALUES (?, ?, ?)''',
+                    (name, depID, majID))
+        conn.commit()
+    except sqlite3.Error as err:
+        print(err)
+    except Exception as err:
+        print(err)
+    finally:
+        if conn != 1:
+            conn.close()
+            
 def depCRUD():
     pass
 def majCRUD():
