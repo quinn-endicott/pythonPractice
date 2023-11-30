@@ -67,7 +67,7 @@ def showAllStu():
     except Exception as err:
         print(err)
     finally:
-        if conn != 0:
+        if conn != None:
             conn.close()
 
 def delStu(stuID):
@@ -75,6 +75,7 @@ def delStu(stuID):
     try:
         conn = sqlite3.connect('college.db')
         cur = conn.cursor()
+        cur.execute('PRAGMA foreign_keys=ON')
         cur.execute('''DELETE FROM Students
                     WHERE StuID == ?''',
                     (stuID,))
@@ -91,6 +92,7 @@ def changeStu(stuID, name, depID, majID):
     try:
         conn = sqlite3.connect('college.db')
         cur = conn.cursor()
+        cur.execute('PRAGMA foreign_keys=ON')
         cur.execute('''UPDATE Students
                     SET Name = ?, DepID = ?, MajorID = ?
                     WHERE StuID == ?''',
@@ -137,6 +139,7 @@ def insertStu(name, depID, majID):
     try:
         conn = sqlite3.connect('college.db')
         cur = conn.cursor()
+        cur.execute('PRAGMA foreign_keys=ON')
         cur.execute('''INSERT INTO Students(Name, DepID, MajorID)
                     VALUES (?, ?, ?)''',
                     (name, depID, majID))
@@ -146,14 +149,13 @@ def insertStu(name, depID, majID):
     except Exception as err:
         print(err)
     finally:
-        if conn != 1:
+        if conn != None:
             conn.close()
 
 
     
             
-def depCRUD():
-    pass
+
 
 def majCRUD():
     majOptions()
@@ -193,6 +195,7 @@ def insertMaj(name):
     try:
         conn = sqlite3.connect('college.db')
         cur = conn.cursor()
+        cur.execute('PRAGMA foreign_keys=ON')
         cur.execute('''INSERT INTO Majors(Name)
                     VALUES (?)''',
                     (name,))
@@ -202,7 +205,7 @@ def insertMaj(name):
     except Exception as err:
         print(err)
     finally:
-        if conn != 1:
+        if conn != None:
             conn.close()
 
 def findMaj(name):
@@ -231,6 +234,7 @@ def changeMaj(majID, name):
     try:
         conn = sqlite3.connect('college.db')
         cur = conn.cursor()
+        cur.execute('PRAGMA foreign_keys=ON')
         cur.execute('''UPDATE Majors
                     SET Name = ?
                     WHERE MajorID == ?''',
@@ -248,6 +252,7 @@ def delMaj(majID):
     try:
         conn = sqlite3.connect('college.db')
         cur = conn.cursor()
+        cur.execute('PRAGMA foreign_keys=ON')
         cur.execute('''DELETE FROM Majors
                     WHERE MajorID == ?''',
                     (majID,))
@@ -275,24 +280,7 @@ def showAllMaj():
     except Exception as err:
         print(err)
     finally:
-        if conn != 0:
-            conn.close()
-
-    conn = None
-    try:
-        conn = sqlite3.connect('college.db')
-        cur = conn.cursor()
-        cur.execute('''SELECT * FROM Majors''')
-        results = cur.fetchall()
-        print('Results: ')
-        for row in results:
-            print(f'ID: {row[0]}, Department: {row[1]}')
-    except sqlite3.Error as err:
-        print(err)
-    except Exception as err:
-        print(err)
-    finally:
-        if conn != 0:
+        if conn != None:
             conn.close()
 
 def depCRUD():
@@ -333,6 +321,7 @@ def insertDep(name):
     try:
         conn = sqlite3.connect('college.db')
         cur = conn.cursor()
+        cur.execute('PRAGMA foreign_keys=ON')
         cur.execute('''INSERT INTO Departments (Name)
                     VALUES (?)''',
                     (name,))
@@ -371,6 +360,7 @@ def changeDep(depID, name):
     try:
         conn = sqlite3.connect('college.db')
         cur = conn.cursor()
+        cur.execute('PRAGMA foreign_keys=ON')
         cur.execute('''UPDATE Departments
                     SET Name = ?
                     WHERE DepID == ?''',
@@ -389,6 +379,7 @@ def delDep(depID):
     try:
         conn = sqlite3.connect('college.db')
         cur = conn.cursor()
+        cur.execute('PRAGMA foreign_keys=ON')
         cur.execute('''DELETE FROM Departments
                     WHERE DepID == ?''',
                     (depID,))
