@@ -154,8 +154,130 @@ def insertStu(name, depID, majID):
             
 def depCRUD():
     pass
+
 def majCRUD():
-    pass
+    majOptions()
+    contVar = 'y'
+    while contVar == 'y':
+        #5 options each
+        choice = int(input('Choose your option from the menu.'))
+        if choice == 1:
+            name = newMajInfo()
+            print(f'New Major: {name}')
+            proVar = input('Add new Major (y/n)?').lower()
+            if proVar == 'y':
+                insertMaj(name)
+        elif choice == 2:
+            name = input('Enter the name of the Major you want to find: ').lower()
+            findMaj(name)
+        elif choice == 3:
+            majID = int(input('Enter the Major ID: '))
+            name= newMajInfo()
+            changeMaj(majID, name)
+        elif choice == 4:
+            majID = int(input('Enter the ID of the Major you wish to Delete: '))
+            delMaj(majID)
+            
+        elif choice == 5:
+            showAllMaj()
+        else:
+            print('Pick an option from the menu.')
+        contVar = input('Perform another action on this table (y/n)?').lower()
+
+def newMajInfo():
+    name = input("Enter the Major's name: ")
+    return name
+
+def insertMaj(name):
+    conn = None
+    try:
+        conn = sqlite3.connect('college.db')
+        cur = conn.cursor()
+        cur.execute('''INSERT INTO Majors(Name)
+                    VALUES (?)''',
+                    (name,))
+        conn.commit()
+    except sqlite3.Error as err:
+        print(err)
+    except Exception as err:
+        print(err)
+    finally:
+        if conn != 1:
+            conn.close()
+
+def findMaj(name):
+    conn = None
+    try:
+        conn = sqlite3.connect('college.db')
+        cur = conn.cursor()
+        cur.execute('''SELECT * FROM Majors
+                    WHERE lower(Name) == ?''',
+                    (name.lower(),))
+        results = cur.fetchall()
+        print('Search Results: ')
+        for row in results:
+            print(f'ID: {row[0]}, Name: {row[1]}')
+    except sqlite3.Error as err:
+        print(err)
+    except Exception as err:
+        print(err)
+    finally:
+        if conn != None:
+            conn.close()
+
+
+def changeMaj(majID, name):
+    conn = None
+    try:
+        conn = sqlite3.connect('college.db')
+        cur = conn.cursor()
+        cur.execute('''UPDATE Majors
+                    SET Name = ?
+                    WHERE MajorID == ?''',
+                    (name, majID))
+        conn.commit()
+    except sqlite3.Error as err:
+        print(err)
+    except Exception as err:
+        print(err)
+    finally:
+        if conn != None:
+            conn.close()
+def delMaj(majID):
+    conn = None
+    try:
+        conn = sqlite3.connect('college.db')
+        cur = conn.cursor()
+        cur.execute('''DELETE FROM Majors
+                    WHERE MajorID == ?''',
+                    (majID,))
+        conn.commit()
+    except sqlite3.Error as err:
+        print(err)
+    except Exception as err:
+        print(err)
+    finally:
+        if conn != None:
+            conn.close()
+
+def showAllMaj():
+    conn = None
+    try:
+        conn = sqlite3.connect('college.db')
+        cur = conn.cursor()
+        cur.execute('''SELECT * FROM Majors''')
+        results = cur.fetchall()
+        print('Results: ')
+        for row in results:
+            print(f'ID: {row[0]}, Department: {row[1]}')
+    except sqlite3.Error as err:
+        print(err)
+    except Exception as err:
+        print(err)
+    finally:
+        if conn != 0:
+            conn.close()
+
 
 def stuOptions():
     print('Options:')
