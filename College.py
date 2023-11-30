@@ -269,6 +269,146 @@ def showAllMaj():
         results = cur.fetchall()
         print('Results: ')
         for row in results:
+            print(f'ID: {row[0]}, Major: {row[1]}')
+    except sqlite3.Error as err:
+        print(err)
+    except Exception as err:
+        print(err)
+    finally:
+        if conn != 0:
+            conn.close()
+
+    conn = None
+    try:
+        conn = sqlite3.connect('college.db')
+        cur = conn.cursor()
+        cur.execute('''SELECT * FROM Majors''')
+        results = cur.fetchall()
+        print('Results: ')
+        for row in results:
+            print(f'ID: {row[0]}, Department: {row[1]}')
+    except sqlite3.Error as err:
+        print(err)
+    except Exception as err:
+        print(err)
+    finally:
+        if conn != 0:
+            conn.close()
+
+def depCRUD():
+    depOptions()
+    contVar = 'y'
+    while contVar == 'y':
+        #5 options each
+        choice = int(input('Choose your option from the menu.'))
+        if choice == 1:
+            name = newDepInfo()
+            print(f'New Department: {name}')
+            proVar = input('Add new Department (y/n)?').lower()
+            if proVar == 'y':
+                insertDep(name)
+        elif choice == 2:
+            name = input('Enter the name of the Department you want to find: ').lower()
+            findDep(name)
+        elif choice == 3:
+            depID = int(input('Enter the Department ID: '))
+            name= newDepInfo()
+            changeDep(depID, name)
+        elif choice == 4:
+            depID = int(input('Enter the ID of the Department you wish to Delete: '))
+            delDep(depID)
+            
+        elif choice == 5:
+            showAllDep()
+        else:
+            print('Pick an option from the menu.')
+        contVar = input('Perform another action on this table (y/n)?').lower()
+
+def newDepInfo():
+    name = input("Enter the Department's name: ")
+    return name
+
+def insertDep(name):
+    conn = None
+    try:
+        conn = sqlite3.connect('college.db')
+        cur = conn.cursor()
+        cur.execute('''INSERT INTO Departments (Name)
+                    VALUES (?)''',
+                    (name,))
+        conn.commit()
+    except sqlite3.Error as err:
+        print(err)
+    except Exception as err:
+        print(err)
+    finally:
+        if conn != 1:
+            conn.close()
+
+def FindDep(name):
+    conn = None
+    try:
+        conn = sqlite3.connect('college.db')
+        cur = conn.cursor()
+        cur.execute('''SELECT * FROM Departments
+                    WHERE lower(Name) == ?''',
+                    (name.lower(),))
+        results = cur.fetchall()
+        print('Search Results: ')
+        for row in results:
+            print(f'ID: {row[0]}, Name: {row[1]}')
+    except sqlite3.Error as err:
+        print(err)
+    except Exception as err:
+        print(err)
+    finally:
+        if conn != None:
+            conn.close()
+
+def changeDep(depID, name):
+
+    conn = None
+    try:
+        conn = sqlite3.connect('college.db')
+        cur = conn.cursor()
+        cur.execute('''UPDATE Departments
+                    SET Name = ?
+                    WHERE DepID == ?''',
+                    (name, depID))
+        conn.commit()
+    except sqlite3.Error as err:
+        print(err)
+    except Exception as err:
+        print(err)
+    finally:
+        if conn != None:
+            conn.close()
+def delDep(depID):
+
+    conn = None
+    try:
+        conn = sqlite3.connect('college.db')
+        cur = conn.cursor()
+        cur.execute('''DELETE FROM Departments
+                    WHERE DepID == ?''',
+                    (depID,))
+        conn.commit()
+    except sqlite3.Error as err:
+        print(err)
+    except Exception as err:
+        print(err)
+    finally:
+        if conn != None:
+            conn.close()
+def showAllDep():
+    conn = None
+    try:
+        conn = sqlite3.connect('college.db')
+        cur = conn.cursor()
+        cur.execute('''SELECT * FROM Departments''')
+        results = cur.fetchall()
+        print('Results: ')
+        for row in results:
             print(f'ID: {row[0]}, Department: {row[1]}')
     except sqlite3.Error as err:
         print(err)
