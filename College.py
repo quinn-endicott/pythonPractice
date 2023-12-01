@@ -32,7 +32,8 @@ def stuCRUD():
         if choice == 1:
             name, depID, majID = newStuInfo()
             print(f'New Student: {name}, Department: {depID}, Major: {majID} ')
-            proVar = input('Add new student (y/n)?').lower()
+            print()
+            proVar = input('Proceed to add new student (y/n)?').lower()
             if proVar == 'y':
                 insertStu(name, depID, majID)
         elif choice == 2:
@@ -50,6 +51,7 @@ def stuCRUD():
             showAllStu()
         else:
             print('Pick an option from the menu.')
+            print()
         contVar = input('Perform another action on this table (y/n)?').lower()
         
 def showAllStu():
@@ -62,10 +64,13 @@ def showAllStu():
         print('Results: ')
         for row in results:
             print(f'ID: {row[0]}, Name: {row[1]}, Department: {row[2]}, Major: {row[3]}')
+        print()
     except sqlite3.Error as err:
         print(err)
+        print()
     except Exception as err:
         print(err)
+        print()
     finally:
         if conn != None:
             conn.close()
@@ -82,8 +87,10 @@ def delStu(stuID):
         conn.commit()
     except sqlite3.Error as err:
         print(err)
+        print()
     except Exception as err:
         print(err)
+        print()
     finally:
         if conn != None:
             conn.close()
@@ -100,8 +107,10 @@ def changeStu(stuID, name, depID, majID):
         conn.commit()
     except sqlite3.Error as err:
         print(err)
+        print()
     except Exception as err:
         print(err)
+        print()
     finally:
         if conn != None:
             conn.close()
@@ -119,10 +128,13 @@ def findStu(name):
         print('Search Results: ')
         for row in results:
             print(f'ID: {row[0]}, Name: {row[1]}, Department: {row[2]}, Major: {row[3]}')
+            print()
     except sqlite3.Error as err:
         print(err)
+        print()
     except Exception as err:
         print(err)
+        print()
     finally:
         if conn != None:
             conn.close()
@@ -146,8 +158,10 @@ def insertStu(name, depID, majID):
         conn.commit()
     except sqlite3.Error as err:
         print(err)
+        print()
     except Exception as err:
         print(err)
+        print()
     finally:
         if conn != None:
             conn.close()
@@ -166,7 +180,8 @@ def majCRUD():
         if choice == 1:
             name = newMajInfo()
             print(f'New Major: {name}')
-            proVar = input('Add new Major (y/n)?').lower()
+            print()
+            proVar = input('Proceed to add new Major (y/n)?').lower()
             if proVar == 'y':
                 insertMaj(name)
         elif choice == 2:
@@ -202,8 +217,10 @@ def insertMaj(name):
         conn.commit()
     except sqlite3.Error as err:
         print(err)
+        print()
     except Exception as err:
         print(err)
+        print()
     finally:
         if conn != None:
             conn.close()
@@ -220,10 +237,13 @@ def findMaj(name):
         print('Search Results: ')
         for row in results:
             print(f'ID: {row[0]}, Name: {row[1]}')
+            print()
     except sqlite3.Error as err:
         print(err)
+        print()
     except Exception as err:
         print(err)
+        print()
     finally:
         if conn != None:
             conn.close()
@@ -242,8 +262,10 @@ def changeMaj(majID, name):
         conn.commit()
     except sqlite3.Error as err:
         print(err)
+        print()
     except Exception as err:
         print(err)
+        print()
     finally:
         if conn != None:
             conn.close()
@@ -259,8 +281,10 @@ def delMaj(majID):
         conn.commit()
     except sqlite3.Error as err:
         print(err)
+        print()
     except Exception as err:
         print(err)
+        print()
     finally:
         if conn != None:
             conn.close()
@@ -275,10 +299,13 @@ def showAllMaj():
         print('Results: ')
         for row in results:
             print(f'ID: {row[0]}, Major: {row[1]}')
+        print()
     except sqlite3.Error as err:
         print(err)
+        print()
     except Exception as err:
         print(err)
+        print()
     finally:
         if conn != None:
             conn.close()
@@ -292,7 +319,8 @@ def depCRUD():
         if choice == 1:
             name = newDepInfo()
             print(f'New Department: {name}')
-            proVar = input('Add new Department (y/n)?').lower()
+            print()
+            proVar = input('Proceed to add new Department (y/n)?').lower()
             if proVar == 'y':
                 insertDep(name)
         elif choice == 2:
@@ -310,6 +338,7 @@ def depCRUD():
             showAllDep()
         else:
             print('Pick an option from the menu.')
+            print()
         contVar = input('Perform another action on this table (y/n)?').lower()
 
 def newDepInfo():
@@ -328,8 +357,10 @@ def insertDep(name):
         conn.commit()
     except sqlite3.Error as err:
         print(err)
+        print()
     except Exception as err:
         print(err)
+        print()
     finally:
         if conn != 1:
             conn.close()
@@ -346,10 +377,13 @@ def FindDep(name):
         print('Search Results: ')
         for row in results:
             print(f'ID: {row[0]}, Name: {row[1]}')
+            print()
     except sqlite3.Error as err:
         print(err)
+        print()
     except Exception as err:
         print(err)
+        print()
     finally:
         if conn != None:
             conn.close()
@@ -368,8 +402,10 @@ def changeDep(depID, name):
         conn.commit()
     except sqlite3.Error as err:
         print(err)
+        print()
     except Exception as err:
         print(err)
+        print()
     finally:
         if conn != None:
             conn.close()
@@ -386,8 +422,10 @@ def delDep(depID):
         conn.commit()
     except sqlite3.Error as err:
         print(err)
+        print()
     except Exception as err:
         print(err)
+        print()
     finally:
         if conn != None:
             conn.close()
@@ -401,10 +439,13 @@ def showAllDep():
         print('Results: ')
         for row in results:
             print(f'ID: {row[0]}, Department: {row[1]}')
+        print()
     except sqlite3.Error as err:
         print(err)
+        print()
     except Exception as err:
         print(err)
+        print()
     finally:
         if conn != 0:
             conn.close()
@@ -417,6 +458,7 @@ def stuOptions():
     print('3. Change Student information')
     print('4. Delete Student Records')
     print('5. Show all Students')
+    print()
 def depOptions():
     print('Options:')
     print('1. Add a Department')
@@ -424,6 +466,7 @@ def depOptions():
     print('3. Change Department information')
     print('4. Delete Department Records')
     print('5. Show all Departments')
+    print()
 def majOptions():
     print('Options:')
     print('1. Add a Major')
@@ -431,8 +474,10 @@ def majOptions():
     print('3. Change Major information')
     print('4. Delete Major Records')
     print('5. Show all Majors')
+    print()
 def mainOptions():
-    print('Choose a database to operate on: ')
+    print('Choose a table to operate on: ')
     print('1. Students')
     print('2. Departments')
     print('3. Majors')
+    print()
